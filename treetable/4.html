@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="style/bootstrap.css"/>
+    <style>
+        .table:not(.table-condensed)>tbody>tr>td.treenode {
+            padding-top: 0;
+            padding-bottom: 0;
+            border-bottom: solid #fff 1px;
+        }
+
+        .treenode .vertical, .treenode .vertical.last {
+            float: left;
+            display: block;
+            width: 1px;
+            border-left: dashed silver 1px;
+            height: 38px;
+            margin-left: 8px;
+        }
+        .treenode .space, .treenode .node {
+            float: left;
+            display: block;
+            width: 15px;
+            height: 5px;
+            margin-top: 15px;
+        }
+        .treenode .node {
+            border-top: dashed silver 1px;
+        }
+        .treenode .space, .treenode .node {
+            float: left;
+            display: block;
+            width: 15px;
+            height: 5px;
+            margin-top: 15px;
+        }
+
+        .treenode .text {
+            float: left;
+            display: block;
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+        .Btn{
+            width: 20px;
+            padding: 0 5px;
+        }
+        .treenode .vertical.last {
+            height: 15px;
+        }
+    </style>
+</head>
+<body>
+<table id="treecol">
+
+</table>
+
+
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/TreeColumn1.js"></script>
+<script>
+
+    var nodes=[
+        {"id":"10179", "name":"银行总行" ,"parentid":"root","state":"opened","option":{"损益":"27","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},//注意格式，第一个必须为root根节点
+        {"id":"10187", "name":"南京分行" ,"parentid":"10179","state":"closed","option":{"损益":"26","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10188", "name":"上海分行" ,"parentid":"10179","state":"closed","option":{"损益":"25","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10189", "name":"期货业务" ,"parentid":"10187","state":"closed","option":{"损益":"24","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10190", "name":"商品期货" ,"parentid":"10189","state":"closed","option":{"损益":"23","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/11"}},
+        {"id":"10191", "name":"农产品期货" ,"parentid":"10190","state":"opened","option":{"损益":"22","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10192", "name":"农产品期权" ,"parentid":"10190","state":"closed","option":{"损益":"21","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10476", "name":"固收业务" ,"parentid":"10187","state":"closed","option":{"损益":"20","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10477", "name":"利率产品" ,"parentid":"10476","state":"closed","option":{"损益":"19","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10478", "name":"利率掉期" ,"parentid":"10477","state":"closed","option":{"损益":"18","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10479", "name":"固收产品" ,"parentid":"10476","state":"closed","option":{"损益":"17","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10480", "name":"本币债券" ,"parentid":"10479","state":"closed","option":{"损益":"16","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10481", "name":"外币债券" ,"parentid":"10479","state":"closed","option":{"损益":"15","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10535", "name":"利率远期" ,"parentid":"10477","state":"closed","option":{"损益":"14","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10542", "name":"深圳分行" ,"parentid":"10179","state":"closed","option":{"损益":"13","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10543", "name":"广州分行 " ,"parentid":"10179","state":"closed","option":{"损益":"12","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10548", "name":"外汇业务 " ,"parentid":"10188","state":"closed","option":{"损益":"11","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10549", "name":"金融期货" ,"parentid":"10189","state":"closed","option":{"损益":"10","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10550", "name":"国债期货" ,"parentid":"10549","state":"closed","option":{"损益":"9","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10551", "name":"石油期货" ,"parentid":"10190","state":"closed","option":{"损益":"8","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10552", "name":"股指期货" ,"parentid":"10549","state":"closed","option":{"损益":"7","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10556", "name":"美元外汇" ,"parentid":"10548","state":"closed","option":{"损益":"6","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10557", "name":"欧元外汇" ,"parentid":"10548","state":"closed","option":{"损益":"5","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10558", "name":"代客外汇" ,"parentid":"10556","state":"closed","option":{"损益":"4","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10559", "name":"自营外汇" ,"parentid":"10556","state":"closed","option":{"损益":"3","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10564", "name":"1" ,"parentid":"10190","state":"closed","option":{"损益":"2","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+        {"id":"10565", "name":"石油期权" ,"parentid":"10190","state":"closed","option":{"损益":"1","估值":"10","货币":"CNY","COMPUTETIME":"2017/7/10"}},
+    ]//数据
+    treecol.init('#treecol',nodes);//调用
+
+</script>
+</body>
+</html>
